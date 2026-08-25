@@ -1,11 +1,14 @@
+import os
+
+
 def copy_file(command: str) -> None:
     parts = command.strip().split()
     if len(parts) != 3 or parts[0] != "cp":
-        raise ValueError("Invalid command format")
+        return
 
     _, src, dest = parts
 
-    if src == dest:
+    if src == dest or not os.path.exists(src):
         return
 
     with open(src, "r") as file_in, open(dest, "w") as file_out:
